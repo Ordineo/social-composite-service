@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: be.ordina.ordineo.SocialCompositeServiceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.183 sec - in be.ordina.ordineo.SocialCompositeServiceApplicationTests
