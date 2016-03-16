@@ -2,7 +2,8 @@ logging:
   level:
     be.ordina: 'DEBUG'
     org.springframework.web: 'DEBUG'
-
-# SPRING SOCIAL LINKEDIN
-spring.social.linkedin.app-id: 77vakg6mkfal1f
-spring.social.linkedin.app-secret: poWa0icaPy8acej4
+spring:
+  social:
+    linkedin:
+      app-id: 77yc61m5y3gv0e
+      app-secret: hAL2JfmAtdzAOZPT
