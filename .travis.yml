@@ -1,0 +1,22 @@
+language: java
+jdk:
+- oraclejdk8
+sudo: false
+install:
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- mvn package
+deploy:
+  edge: true
+  provider: cloudfoundry
+  api: https://api.run.pivotal.io
+  username: hans.michiels@ordina.be
+  password:
+    secure: BwckXRPRg79StA9LIKPkeYtLUNwmGXh5qQRIIx7UPSUfg7jsCI9fxpJxHspovwnh5gM6wp37AoTyAo9U+3lEkjN4aQlmwqBN5cVsYJpZBXU9/MxwUT9lUwzeuQA/GBqS9niiljyXCYLyamCRZXjQmbYdoyJIu0Bb/wP01MxLRsFwZnxPjdYvTMbPlwErTTdoNklUQ55KXCnsnNxdsCdHvo19bp5Igi0bwMdAwX3RHqg4tRM7i+N3GqUF0v5UrAIIpwbhIe3aNCI7QwNnu8HOiR8w5um6FnUGk3gYb1LizjiKTkuUY7jjY0wNQhS+gfmv4VorJYmxODcKRyXqPmpjrIsBLNAINtBq1CsYj1bap8y2xWJQXqxgA479Ib0EhUhM9mo3980BYIxXpipZlu1yyV3NUx0z4YqE2JYfIwqLfQrbSWcknFHcJ1m0tm52apy+fl90+CGOtZ95O3nE4CM+rVAFumKsiTQxbaVFKLY//TQhB+45ZvW2FbELi92KTd4m/RUWbokRCbGjnWrX4nFM34apzuorjfy4tuu58mfgV8j6ESZe1C9D1O7uYAoDbQS8yw1rasNZsZ15swRzczKtSm5mYv2dYQVda5hoxRc5/BFMOj9675ugRo8ZOYekAVFBsxsBRdXfZT1C094uR2kzG626z6EM8lLOkPl+eGpk9gA=
+  organization: OrdinaBelgiumNV
+  space: development
+  on:
+    repo: Ordineo/social-composite-service
+    branch: master
+notifications:
+  slack:
+    secure: JZ5URGlnE8VMUUUbo02/kZFeEAHOEkaqJmYz1tde/d2WLDCL88MaZ2T2TporyOwm20bZ119hmLsCqhDoguybhgZznkOBRTcAA6l+pgOBPKWXaV7oRh7sJIHAPprMGtF624M6L3suiNTVKkSZsOVN+n7yoLx67YYUAB28JDmLuc9yQ4RyvvaNyIQ8jkHkm17uNcEPyHTl/A1WVwj9P1PT9ldMmCe7xeSSVnSQyITnqpJJWkNo7D3IvQ9i7Va7WkywT6enEpHqOju8W4B1Qun5M1bP5SaE57pTg7m1g0iErBfTCfvWUFnaE9Pej4iUp72M/Msu/OJQJpeNqzgUMJqN8pLaydT46h7YX7Cpfnls5+W4E/KbF2zFZeDCV7J0y2Sv/v1YXW5+fojGQUFIeuQpZKnnrOGnjYf5C66YkkwZSQConc8hqPP0DN5NisDd8zB8bYv09Auhkpu2ZrlZzglrqHvu1GZwUTnYn8O8bhGj3y0TOWj3V75yKnE9QTIIcHgL64Ou5LFio/ONggSherXHZFF2+SSF4wmOP0vNZ0wdBVLJwYKV4+e+T+emP+kb4NQVurIOrVn9oVoUKtgGt6lN8uQkQXxEpd9aUBqExwDy3lZJG/nr9QHAmeAV9gXIeQURJITIxtZ6FoMBeCQszDVzzFDsM5sQH8o7PtRiIz7Gho4=

@@ -1,0 +1,23 @@
+spring:
+  jackson:
+    serialization:
+      WRITE_CHAR_ARRAYS_AS_JSON_ARRAYS: false
+  data:
+    rest:
+      base-uri: /api
+  jpa:
+    #show-sql: true
+    hibernate:
+      ddl-auto: create
+utils:
+  dateformat: ddMMyyyy
+logging:
+  level:
+    be.ordina: 'DEBUG'
+
+# SPRING SOCIAL
+spring.social.auto-connection-views: false # Set to true for default connection views or false if you provide your own
+
+# SPRING SOCIAL LINKEDIN
+spring.social.linkedin.app-id: 77vakg6mkfal1f
+spring.social.linkedin.app-secret: poWa0icaPy8acej4
