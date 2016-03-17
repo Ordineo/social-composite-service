@@ -1,5 +1,7 @@
 package be.ordina.ordineo.controller;
 
+import org.springframework.social.NotAuthorizedException;
+import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.stereotype.Controller;
@@ -29,12 +31,23 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
-        if (connectionRepository.findPrimaryConnection(LinkedIn.class) == null) {
+        Connection<LinkedIn> primaryConnection = connectionRepository.findPrimaryConnection(LinkedIn.class);
+
+        if (primaryConnection == null) {
             return "redirect:/connect/linkedin";
         }
 
-        model.addAttribute("firstName", linkedIn.profileOperations().getUserProfile().getFirstName());
-        return "home";
+        if ( primaryConnection.hasExpired()) {
+            primaryConnection.refresh();
+        }
+
+        try {
+            model.addAttribute("firstName", linkedIn.profileOperations().getUserProfile().getFirstName());
+            return "home";
+        } catch (NotAuthorizedException e) {
+            connectionRepository.removeConnection( primaryConnection.getKey() );
+            return "redirect:/connect/linkedin";
+        }
     }
 
 }
