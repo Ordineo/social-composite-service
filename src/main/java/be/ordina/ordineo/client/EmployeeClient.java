@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient("https://employee-ordineo")
 public interface EmployeeClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/api/employees/search/employee{username}")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/employees/search/findByUsername?username={username}")
     EmployeeResource  getEmployee(@PathVariable("username") String username);
 
 

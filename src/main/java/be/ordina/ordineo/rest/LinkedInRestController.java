@@ -21,14 +21,17 @@ import javax.inject.Inject;
 public class LinkedInRestController {
 
     private final LinkedIn linkedIn;
+    private final LinkedInService service;
+
 
     @Inject
-    public LinkedInRestController(LinkedIn linkedIn) {
+    @Autowired
+    public LinkedInRestController(LinkedIn linkedIn, LinkedInService service) {
         this.linkedIn = linkedIn;
+        this.service = service;
     }
 
-    @Autowired
-    LinkedInService service;
+
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<EmployeeResource> syncProfile(@RequestParam String username, Model model) {

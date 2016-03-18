@@ -6,10 +6,12 @@ import be.ordina.ordineo.service.LinkedInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Hans on 17/03/16.
  */
+@Service
 public class LinkedInServiceImpl implements LinkedInService {
 
     @Autowired
