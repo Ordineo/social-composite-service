@@ -1,5 +1,8 @@
 package be.ordina.ordineo.rest;
 
+import be.ordina.ordineo.resource.EmployeeResource;
+import be.ordina.ordineo.service.LinkedInService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.stereotype.Controller;
@@ -24,12 +27,14 @@ public class LinkedInRestController {
         this.linkedIn = linkedIn;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity syncProfile(@RequestParam String username, Model model) {
-        //passing username as a parameter so SocialConfig.RequestUsernameSource can fetch it
+    @Autowired
+    LinkedInService service;
 
-        //TODO Hans: pass username & linkedIn object to your service; add service with @Autowired :)
-        return ResponseEntity.ok(null);
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ResponseEntity<EmployeeResource> syncProfile(@RequestParam String username, Model model) {
+        //passing username as a parameter so SocialConfig.RequestUsernameSource can fetch it
+        EmployeeResource employee =   service.ApplyLinkedInDataToEmployee(username,linkedIn);
+        return ResponseEntity.ok(employee);
     }
 
 }
