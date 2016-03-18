@@ -45,10 +45,10 @@ public class SocialConfig extends SocialConfigurerAdapter {
         }
     }
 
-    @Bean
+/*    @Bean
     @Primary
     @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
     public ConnectionRepository connectionRepository(UsersConnectionRepository usersConnectionRepository) {
         return usersConnectionRepository.createConnectionRepository(getUserIdSource().getUserId());
-    }
+    }*/
 }
