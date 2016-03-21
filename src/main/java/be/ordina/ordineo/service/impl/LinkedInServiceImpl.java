@@ -30,6 +30,8 @@ public class LinkedInServiceImpl implements LinkedInService {
         employee.setLinkedin(profile.getPublicProfileUrl());
         employee.setFunction(profile.getHeadline());
 
+        employeeClient.synchronizeEmployee(username,employee);
+
         return employee;
     }
 }
