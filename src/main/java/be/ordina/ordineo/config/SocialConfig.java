@@ -1,8 +1,15 @@
 package be.ordina.ordineo.config;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.*;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
+import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,9 +32,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
         @Override
         public String getUserId() {
             RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
-            HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
+            HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
 
-            String userId = (String)request.getSession().getAttribute("username");
+            String userId = (String) request.getSession().getAttribute("username");
 
             if (StringUtils.isEmpty(userId)) {
                 userId = request.getParameter("username");
@@ -37,4 +44,11 @@ public class SocialConfig extends SocialConfigurerAdapter {
             return userId;
         }
     }
+
+/*    @Bean
+    @Primary
+    @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+    public ConnectionRepository connectionRepository(UsersConnectionRepository usersConnectionRepository) {
+        return usersConnectionRepository.createConnectionRepository(getUserIdSource().getUserId());
+    }*/
 }
