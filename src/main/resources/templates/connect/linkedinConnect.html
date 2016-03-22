@@ -5,7 +5,7 @@
 <body>
 <h3>Connect to LinkedIn</h3>
 
-<form action="/connect/linkedin" method="POST">
+<form th:action="@{/connect/linkedin}" method="POST">
     <input type="hidden" name="scope" value="r_basicprofile" />
     <div class="formInfo">
         <p>You aren't connected to LinkedIn yet. Click the button to connect this application with your LinkedIn account.</p>
