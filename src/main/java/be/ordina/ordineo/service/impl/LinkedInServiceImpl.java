@@ -24,13 +24,12 @@ public class LinkedInServiceImpl implements LinkedInService {
         EmployeeResource employee = employeeClient.getEmployee(username);
         employee.setFirstName(profile.getFirstName());
         employee.setLastName(profile.getLastName());
-        employee.setEmail(profile.getEmailAddress());
         employee.setProfilePicture(profile.getProfilePictureUrl());
         employee.setDescription(profile.getSummary());
         employee.setLinkedin(profile.getPublicProfileUrl());
         employee.setFunction(profile.getHeadline());
 
-        employeeClient.synchronizeEmployee(username,employee);
+        employeeClient.synchronizeEmployee(employee);
 
         return employee;
     }

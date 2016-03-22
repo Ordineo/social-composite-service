@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Hans on 17/03/16.
@@ -18,7 +17,7 @@ public interface EmployeeClient {
     @RequestMapping(method = RequestMethod.GET, value = "/api/employees/search/employee?username={username}")
     EmployeeResource  getEmployee(@PathVariable("username") String username);
 
-    @RequestMapping(method = RequestMethod.PUT,value = "/linkedin/{username}")
-    ResponseEntity synchronizeEmployee(@PathVariable("username") String username, @RequestBody EmployeeResource employeeResource);
+    @RequestMapping(method = RequestMethod.PUT,value = "/linkedin")
+    ResponseEntity synchronizeEmployee(@RequestBody EmployeeResource employeeResource);
 
 }
