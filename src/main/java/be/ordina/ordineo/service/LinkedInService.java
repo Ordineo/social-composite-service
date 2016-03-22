@@ -6,10 +6,8 @@ import org.springframework.social.linkedin.api.LinkedIn;
 /**
  * Created by Hans on 17/03/16.
  */
-public interface LinkedInService
-{
-     EmployeeResource ApplyLinkedInDataToEmployee (String username , LinkedIn linkedIn);
+public interface LinkedInService {
 
-
+     EmployeeResource applyLinkedInDataToEmployee (String username , LinkedIn linkedIn);
 
 }

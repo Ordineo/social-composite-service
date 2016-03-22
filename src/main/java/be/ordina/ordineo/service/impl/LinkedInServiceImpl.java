@@ -17,9 +17,8 @@ public class LinkedInServiceImpl implements LinkedInService {
     @Autowired
     private EmployeeClient employeeClient;
 
-
     @Override
-    public EmployeeResource ApplyLinkedInDataToEmployee(String username, LinkedIn linkedIn) {
+    public EmployeeResource applyLinkedInDataToEmployee(String username, LinkedIn linkedIn) {
         LinkedInProfile profile = linkedIn.profileOperations().getUserProfileFull();
         EmployeeResource employee = employeeClient.getEmployee(username);
         employee.setFirstName(profile.getFirstName());
