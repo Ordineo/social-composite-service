@@ -26,7 +26,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
  */
 public class LinkedInFilterTest {
 
-  private  Connection<LinkedIn> connection = mock(Connection.class);
+ /* private  Connection<LinkedIn> connection = mock(Connection.class);
     @Mock
     ConnectionRepository repository;
     @Mock
@@ -74,7 +74,7 @@ public class LinkedInFilterTest {
     }
 
     @Test
-
+*/
 
 
 
