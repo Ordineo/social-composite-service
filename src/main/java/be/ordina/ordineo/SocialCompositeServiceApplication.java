@@ -1,5 +1,6 @@
 package be.ordina.ordineo;
 
+import be.ordina.ordineo.filter.LinkedInAuthorizationFilter;
 import be.ordina.ordineo.filter.LinkedInConnectionFilter;
 import be.ordina.ordineo.filter.SimpleCORSFilter;
 import org.springframework.boot.SpringApplication;
@@ -23,10 +24,19 @@ public class SocialCompositeServiceApplication {
 	}
 
 	@Bean
+	public FilterRegistrationBean linkedInAuthorizationFilterRegistration() {
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(linkedInAuthorizationFilter());
+		registration.addUrlPatterns("/api/*");
+		registration.setName("linkedInAuthorizationFilter");
+		return registration;
+	}
+
+	@Bean
 	public FilterRegistrationBean linkedInConnectionFilterRegistration() {
 		FilterRegistrationBean registration = new FilterRegistrationBean();
 		registration.setFilter(linkedInConnectionFilter());
-		registration.addUrlPatterns("/api/*");
+		registration.addUrlPatterns("/connect/linkedin");
 		registration.setName("linkedInConnectionFilter");
 		return registration;
 	}
@@ -41,9 +51,12 @@ public class SocialCompositeServiceApplication {
 	}
 
 	@Bean
-	public Filter linkedInConnectionFilter() {
-		return new LinkedInConnectionFilter();
+	public Filter linkedInAuthorizationFilter() {
+		return new LinkedInAuthorizationFilter();
 	}
+
+	@Bean
+	public Filter linkedInConnectionFilter() {return new LinkedInConnectionFilter();}
 
 	@Bean
 	public Filter simpleCORSFilter() {return new SimpleCORSFilter();}

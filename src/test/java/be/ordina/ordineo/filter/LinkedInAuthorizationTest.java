@@ -29,13 +29,13 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * Created by Hans on 23/03/16.
  */
-public class LinkedInFilterTest {
+public class LinkedInAuthorizationTest {
 
     @Mock
     ConnectionRepository repository;
 
     @InjectMocks
-    LinkedInConnectionFilter filter;
+    LinkedInAuthorizationFilter filter;
 
     MockHttpServletResponse response ;
     MockHttpServletRequest request;
