@@ -34,21 +34,16 @@ public class SocialConfig extends SocialConfigurerAdapter {
             RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
             HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
 
-            String userId = (String) request.getSession().getAttribute("username");
+            String userId = request.getParameter("username");
 
             if (StringUtils.isEmpty(userId)) {
-                userId = request.getParameter("username");
+                userId = (String) request.getSession().getAttribute("username");
+            } else {
                 request.getSession().setAttribute("username", userId);
             }
 
-            return userId;
+            return userId.toLowerCase();
         }
     }
 
-/*    @Bean
-    @Primary
-    @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
-    public ConnectionRepository connectionRepository(UsersConnectionRepository usersConnectionRepository) {
-        return usersConnectionRepository.createConnectionRepository(getUserIdSource().getUserId());
-    }*/
 }
