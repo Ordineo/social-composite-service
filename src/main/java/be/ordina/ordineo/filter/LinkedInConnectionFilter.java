@@ -7,6 +7,7 @@ import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.linkedin.api.LinkedIn;
+import org.springframework.web.util.NestedServletException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
@@ -42,11 +43,20 @@ public class LinkedInConnectionFilter implements Filter {
 
         try {
             filterChain.doFilter(servletRequest, servletResponse);
-        } catch (NotAuthorizedException e) {
+        /*} catch (NotAuthorizedException e) {
             connectionRepository.removeConnection( primaryConnection.getKey() );
 
             authorizationNeeded(response);
-            return;
+            return;*/
+        } catch (NestedServletException e) {
+            if (e.getCause() instanceof  NotAuthorizedException) {
+                connectionRepository.removeConnection( primaryConnection.getKey() );
+
+                authorizationNeeded(response);
+                return;
+            } else {
+                throw e;
+            }
         }
     }
 
