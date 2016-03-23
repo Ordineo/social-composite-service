@@ -60,7 +60,7 @@ public class LinkedInConnectionFilter implements Filter {
         }
     }
 
-    public void authorizationNeeded(HttpServletResponse response) throws IOException {
+    protected void authorizationNeeded(HttpServletResponse response) throws IOException {
         response.setStatus( HttpServletResponse.SC_UNAUTHORIZED );
         response.setContentType("application/json");
 
