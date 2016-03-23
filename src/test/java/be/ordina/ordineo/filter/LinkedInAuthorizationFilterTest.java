@@ -29,7 +29,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * Created by Hans on 23/03/16.
  */
-public class LinkedInAuthorizationTest {
+public class LinkedInAuthorizationFilterTest {
 
     @Mock
     ConnectionRepository repository;
@@ -67,8 +67,6 @@ public class LinkedInAuthorizationTest {
 
     @Test
     public void noPrimaryConnection() throws IOException, ServletException {
-        LinkedIn linkedin = mock(LinkedIn.class);
-
         filter.doFilter(request,response,chain);
 
         assertEquals(HttpServletResponse.SC_UNAUTHORIZED, response.getStatus());
