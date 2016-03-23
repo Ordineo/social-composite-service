@@ -28,7 +28,7 @@ public class LinkedInConnectionFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        Connection<LinkedIn> primaryConnection = connectionRepository.findPrimaryConnection(LinkedIn.class);
+        Connection<LinkedIn> primaryConnection = findPrimaryLinkedInConnection();
 
         HttpServletResponse response = (HttpServletResponse)servletResponse;
 
@@ -57,6 +57,18 @@ public class LinkedInConnectionFilter implements Filter {
             } else {
                 throw e;
             }
+        }
+    }
+
+    private Connection<LinkedIn> findPrimaryLinkedInConnection() {
+        try {
+            return connectionRepository.findPrimaryConnection(LinkedIn.class);
+        } catch (IndexOutOfBoundsException e) {
+            /*
+            This catch is needed due to a bug in the connection repository
+            When removing the only existing connection the repository doesn't check on the size; it just gets the first element...
+             */
+            return null;
         }
     }
 
