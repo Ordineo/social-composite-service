@@ -113,6 +113,8 @@ public class LinkedInFilterTest {
 
         filter.doFilter(request, response, chain);
 
+        assertEquals(HttpServletResponse.SC_UNAUTHORIZED, response.getStatus());
+
         verify(repository).findPrimaryConnection(LinkedIn.class);
         verify(connection).hasExpired();
         verify(connection).getKey();
