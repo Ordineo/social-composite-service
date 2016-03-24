@@ -41,13 +41,10 @@ public class LinkedInServiceTest {
 
         LinkedIn linkedin = mock(LinkedIn.class);
         ProfileOperations profileOperations = mock(ProfileOperations.class);
-        Unit unit = new Unit();
-        unit.setId(1L);
-        unit.setName("JWorks");
 
         EmployeeResource resource = new EmployeeResource();
         resource.setId(1L);
-        resource.setUnit(unit);
+        resource.setUnit(new Unit(1L, "JWorks"));
         resource.setGender(Gender.MALE);
         resource.setHireDate(LocalDate.of(2015, Month.AUGUST, 14));
         resource.setStartDate(LocalDate.of(2015, Month.AUGUST, 14));
