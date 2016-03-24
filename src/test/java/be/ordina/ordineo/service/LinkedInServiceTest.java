@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.social.linkedin.api.*;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -41,6 +42,12 @@ public class LinkedInServiceTest {
         LinkedIn linkedin = mock(LinkedIn.class);
         ProfileOperations profileOperations = mock(ProfileOperations.class);
         EmployeeResource resource = new EmployeeResource();
+        resource.setUnit(new Unit((long) 1,"Jworks"));
+        resource.setGender(Gender.MALE);
+        resource.setHireDate(LocalDate.of(2015, Month.AUGUST, 14));
+        resource.setStartDate(LocalDate.of(2015, Month.AUGUST, 14));
+        resource.setResignationDate(LocalDate.of(2016,Month.MARCH,22));
+
         resource.setUsername(username);
         resource.setEmail("test email");
         resource.setPhoneNumber("test phoneNumber");
@@ -63,6 +70,11 @@ public class LinkedInServiceTest {
         assertEquals(profile.getSummary(), resource.getDescription());
         assertEquals(profile.getProfilePictureUrl(), resource.getProfilePicture());
         assertEquals(profile.getDateOfBirth(), resource.getBirthDate());
+        assertEquals(Gender.MALE, resource.getGender());
+        assertEquals(LocalDate.of(2015, Month.AUGUST, 14), resource.getStartDate());
+        assertEquals(LocalDate.of(2015, Month.AUGUST, 14), resource.getHireDate());
+        assertEquals(LocalDate.of(2016, Month.MARCH, 22), resource.getResignationDate());
+        assertEquals(Unit.class, resource.getUnit().getClass());
 
         verify(employeeClient).getEmployee(username);
         verify(employeeClient).synchronizeEmployee(resource);
