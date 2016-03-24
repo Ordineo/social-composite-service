@@ -28,7 +28,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
         return new SessionUsernameSource();
     }
 
-    private static final class SessionUsernameSource implements UserIdSource {
+    protected static final class SessionUsernameSource implements UserIdSource {
         @Override
         public String getUserId() {
             RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
