@@ -33,6 +33,16 @@ public class LinkedInConnectionFilterTest {
     }
 
     @Test
+    public void init() throws ServletException {
+        filter.init(null);
+    }
+
+    @Test
+    public void destroy() {
+        filter.destroy();
+    }
+
+    @Test
     public void doNothingForGet() throws IOException, ServletException {
         request.setMethod("GET");
 

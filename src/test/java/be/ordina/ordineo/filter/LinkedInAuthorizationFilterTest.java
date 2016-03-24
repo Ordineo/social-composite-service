@@ -53,6 +53,16 @@ public class LinkedInAuthorizationFilterTest {
     }
 
     @Test
+    public void init() throws ServletException {
+        filter.init(null);
+    }
+
+    @Test
+    public void destroy() {
+        filter.destroy();
+    }
+
+    @Test
     public void authorizationNeededResponse() throws IOException {
         filter.authorizationNeeded(response);
 
