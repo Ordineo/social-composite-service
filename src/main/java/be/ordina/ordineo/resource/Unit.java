@@ -1,7 +1,6 @@
 
 package be.ordina.ordineo.resource;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import lombok.Setter;
@@ -9,7 +8,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 public class Unit {
 
     private Long id;
