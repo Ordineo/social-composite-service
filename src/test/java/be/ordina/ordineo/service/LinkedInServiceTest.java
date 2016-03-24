@@ -41,9 +41,13 @@ public class LinkedInServiceTest {
 
         LinkedIn linkedin = mock(LinkedIn.class);
         ProfileOperations profileOperations = mock(ProfileOperations.class);
+        Unit unit = new Unit();
+        unit.setId(1L);
+        unit.setName("JWorks");
+
         EmployeeResource resource = new EmployeeResource();
         resource.setId(1L);
-        resource.setUnit(new Unit((long) 1,"Jworks"));
+        resource.setUnit(unit);
         resource.setGender(Gender.MALE);
         resource.setHireDate(LocalDate.of(2015, Month.AUGUST, 14));
         resource.setStartDate(LocalDate.of(2015, Month.AUGUST, 14));
@@ -60,6 +64,10 @@ public class LinkedInServiceTest {
         when(employeeClient.getEmployee(username)).thenReturn(resource);
 
         linkedInService.applyLinkedInDataToEmployee(username, linkedin);
+
+        assertEquals(1, resource.getId().intValue());
+        assertEquals(1, resource.getUnit().getId().intValue());
+        assertEquals("JWorks", resource.getUnit().getName());
 
         assertEquals(username, resource.getUsername());
         assertEquals(profile.getFirstName(), resource.getFirstName());
@@ -82,15 +90,5 @@ public class LinkedInServiceTest {
         verify(employeeClient).synchronizeEmployee(resource);
         verifyNoMoreInteractions(employeeClient);
     }
-    @Test
-    public void testUnit(){
-        Unit unit = new Unit();
-        unit.setId(1l);
-        unit.setName("Jworks");
 
-        assertEquals(Long.valueOf(1), unit.getId());
-        assertEquals("Jworks",unit.getName());
-
-
-    }
 }
