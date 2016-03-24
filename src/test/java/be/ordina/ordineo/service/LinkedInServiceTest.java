@@ -42,6 +42,7 @@ public class LinkedInServiceTest {
         LinkedIn linkedin = mock(LinkedIn.class);
         ProfileOperations profileOperations = mock(ProfileOperations.class);
         EmployeeResource resource = new EmployeeResource();
+        resource.setId(1L);
         resource.setUnit(new Unit((long) 1,"Jworks"));
         resource.setGender(Gender.MALE);
         resource.setHireDate(LocalDate.of(2015, Month.AUGUST, 14));
@@ -75,10 +76,21 @@ public class LinkedInServiceTest {
         assertEquals(LocalDate.of(2015, Month.AUGUST, 14), resource.getHireDate());
         assertEquals(LocalDate.of(2016, Month.MARCH, 22), resource.getResignationDate());
         assertEquals(Unit.class, resource.getUnit().getClass());
+        assertEquals(Long.valueOf(1), resource.getId());
 
         verify(employeeClient).getEmployee(username);
         verify(employeeClient).synchronizeEmployee(resource);
         verifyNoMoreInteractions(employeeClient);
     }
+    @Test
+    public void testUnit(){
+        Unit unit = new Unit();
+        unit.setId(1l);
+        unit.setName("Jworks");
 
+        assertEquals(Long.valueOf(1), unit.getId());
+        assertEquals("Jworks",unit.getName());
+
+
+    }
 }
