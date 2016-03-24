@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -45,7 +46,11 @@ public class SimpleCORSFilterTest {
     public void headersShouldBeSet() throws IOException, ServletException {
         filter.doFilter(request, response, chain);
 
-        assertEquals("*", response.getHeader("Access-Control-Allow-Origin"));
+        List<String> origins = response.getHeaders("Access-Control-Allow-Origin");
+        assertEquals(2, origins.size());
+        assertTrue("Missing origin localhost", origins.contains("http://localhost:8080"));
+        assertTrue("Missing origin cloud secure", origins.contains("https://frontend-ordineo.cfapps.io"));
+
         assertEquals("3600", response.getHeader("Access-Control-Max-Age"));
         assertEquals("location", response.getHeader("Access-Control-Expose-Headers"));
 
