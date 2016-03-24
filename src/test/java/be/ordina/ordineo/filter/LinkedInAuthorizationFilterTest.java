@@ -76,6 +76,18 @@ public class LinkedInAuthorizationFilterTest {
         verifyZeroInteractions(connection);
     }
 
+    @Test
+    public void indexOutOfBoundFromSpringSocial() throws IOException, ServletException {
+        when(repository.findPrimaryConnection(LinkedIn.class)).thenThrow(IndexOutOfBoundsException.class);
+        filter.doFilter(request,response,chain);
+
+        assertEquals(HttpServletResponse.SC_UNAUTHORIZED, response.getStatus());
+
+        verify(repository).findPrimaryConnection(LinkedIn.class);
+        verifyZeroInteractions(repository);
+        verifyZeroInteractions(connection);
+    }
+
 
     @Test
     public void connectionIsExpired() throws IOException, ServletException {
