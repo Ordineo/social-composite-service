@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -43,14 +42,12 @@ public class SimpleCORSFilterTest {
     }
 
     @Test
-    public void headersShouldBeSet() throws IOException, ServletException {
+    public void headersShouldBeSetForLocal() throws IOException, ServletException {
+        request.addHeader("Origin", "http://localhost:8080");
+
         filter.doFilter(request, response, chain);
 
-        List<String> origins = response.getHeaders("Access-Control-Allow-Origin");
-        assertEquals(2, origins.size());
-        assertTrue("Missing origin localhost", origins.contains("http://localhost:8080"));
-        assertTrue("Missing origin cloud secure", origins.contains("https://frontend-ordineo.cfapps.io"));
-
+        assertEquals("http://localhost:8080", response.getHeader("Access-Control-Allow-Origin"));
         assertEquals("3600", response.getHeader("Access-Control-Max-Age"));
         assertEquals("location", response.getHeader("Access-Control-Expose-Headers"));
 
@@ -62,6 +59,37 @@ public class SimpleCORSFilterTest {
         assertTrue("Should allow header X-Requested-With", response.getHeader("Access-Control-Allow-Headers").contains("X-Requested-With"));
         assertTrue("Should allow header Content-Type", response.getHeader("Access-Control-Allow-Headers").contains("Content-Type"));
         assertTrue("Should allow header Accept", response.getHeader("Access-Control-Allow-Headers").contains("Accept"));
+    }
+
+    @Test
+    public void headersShouldBeSetForCloud() throws IOException, ServletException {
+        request.addHeader("Origin", "https://frontend-ordineo.cfapps.io");
+
+        filter.doFilter(request, response, chain);
+
+        assertEquals("https://frontend-ordineo.cfapps.io", response.getHeader("Access-Control-Allow-Origin"));
+        assertEquals("3600", response.getHeader("Access-Control-Max-Age"));
+        assertEquals("location", response.getHeader("Access-Control-Expose-Headers"));
+
+        for (RequestMethod requestMethod : RequestMethod.values()) {
+            assertTrue("Should allow method " + requestMethod.name(), response.getHeader("Access-Control-Allow-Methods").contains(requestMethod.name()));
+        }
+
+        assertTrue("Should allow header Origin", response.getHeader("Access-Control-Allow-Headers").contains("Origin"));
+        assertTrue("Should allow header X-Requested-With", response.getHeader("Access-Control-Allow-Headers").contains("X-Requested-With"));
+        assertTrue("Should allow header Content-Type", response.getHeader("Access-Control-Allow-Headers").contains("Content-Type"));
+        assertTrue("Should allow header Accept", response.getHeader("Access-Control-Allow-Headers").contains("Accept"));
+    }
+
+    @Test
+    public void headersShouldNotBeSetForOthers() throws IOException, ServletException {
+        filter.doFilter(request, response, chain);
+
+        assertNull(response.getHeader("Access-Control-Allow-Origin"));
+        assertNull(response.getHeader("Access-Control-Max-Age"));
+        assertNull(response.getHeader("Access-Control-Expose-Headers"));
+        assertNull(response.getHeader("Access-Control-Allow-Methods"));
+        assertNull(response.getHeader("Access-Control-Allow-Headers"));
     }
 
 }
