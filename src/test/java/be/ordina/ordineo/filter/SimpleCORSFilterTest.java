@@ -32,6 +32,16 @@ public class SimpleCORSFilterTest {
     }
 
     @Test
+    public void init() throws ServletException {
+        filter.init(null);
+    }
+
+    @Test
+    public void destroy() {
+        filter.destroy();
+    }
+
+    @Test
     public void headersShouldBeSet() throws IOException, ServletException {
         filter.doFilter(request, response, chain);
 
