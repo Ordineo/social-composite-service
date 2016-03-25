@@ -24,7 +24,6 @@ public class SimpleCORSFilter implements Filter {
 
         if (Arrays.asList(allowOrigins).contains( originHeader )) {
             response.addHeader("Access-Control-Allow-Origin", originHeader);
-            response.addHeader("Access-Control-Allow-Origin", "https://frontend-ordineo.cfapps.io");
             response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE, PATCH, HEAD, TRACE");
             response.setHeader("Access-Control-Max-Age", "3600");
             response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

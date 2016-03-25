@@ -48,6 +48,7 @@ public class SimpleCORSFilterTest {
         filter.doFilter(request, response, chain);
 
         assertEquals("http://localhost:8080", response.getHeader("Access-Control-Allow-Origin"));
+        assertEquals(1, response.getHeaderValues("Access-Control-Allow-Origin").size());
         assertEquals("3600", response.getHeader("Access-Control-Max-Age"));
         assertEquals("location", response.getHeader("Access-Control-Expose-Headers"));
 
@@ -68,6 +69,7 @@ public class SimpleCORSFilterTest {
         filter.doFilter(request, response, chain);
 
         assertEquals("https://frontend-ordineo.cfapps.io", response.getHeader("Access-Control-Allow-Origin"));
+        assertEquals(1, response.getHeaderValues("Access-Control-Allow-Origin").size());
         assertEquals("3600", response.getHeader("Access-Control-Max-Age"));
         assertEquals("location", response.getHeader("Access-Control-Expose-Headers"));
 
