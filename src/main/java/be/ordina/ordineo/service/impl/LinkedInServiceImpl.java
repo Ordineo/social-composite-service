@@ -32,7 +32,7 @@ public class LinkedInServiceImpl implements LinkedInService {
         employee.setFirstName(profile.getFirstName());
         employee.setLastName(profile.getLastName());
         try {
-            employee.setProfilePicture(GetUserPhotoUrl(linkedIn));
+            getUserPhotoUrl(linkedIn);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class LinkedInServiceImpl implements LinkedInService {
         return employee;
     }
 
-    public String GetUserPhotoUrl(LinkedIn linkedIn) throws IOException {
+    public String getUserPhotoUrl(LinkedIn linkedIn) throws IOException {
         String json = linkedIn.restOperations().getForObject(URIBuilder.fromUri("https://api.linkedin.com/v1/people/~/picture-urls::(original)").build(), String.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
