@@ -3,10 +3,8 @@ package be.ordina.ordineo.service.impl;
 import be.ordina.ordineo.client.EmployeeClient;
 import be.ordina.ordineo.resource.EmployeeResource;
 import be.ordina.ordineo.service.LinkedInService;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfileFull;
@@ -31,11 +29,6 @@ public class LinkedInServiceImpl implements LinkedInService {
         EmployeeResource employee = employeeClient.getEmployee(username);
         employee.setFirstName(profile.getFirstName());
         employee.setLastName(profile.getLastName());
-        try {
-            getUserPhotoUrl(linkedIn);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         employee.setDescription(profile.getSummary());
         employee.setLinkedin(profile.getPublicProfileUrl());
         employee.setFunction(profile.getHeadline());
