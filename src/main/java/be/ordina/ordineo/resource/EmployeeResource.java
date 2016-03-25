@@ -27,8 +27,6 @@ public class EmployeeResource {
 
     private String description;
 
-    private String profilePicture;
-
     private Gender gender;
 
     private LocalDate birthDate;

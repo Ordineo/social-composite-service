@@ -77,7 +77,6 @@ public class LinkedInServiceTest {
         assertEquals("test phoneNumber", resource.getPhoneNumber());
         assertEquals(profile.getHeadline(), resource.getFunction()); //TODO: do we really want to take this from linked in?
         assertEquals(profile.getSummary(), resource.getDescription());
-        assertEquals(profile.getProfilePictureUrl(), resource.getProfilePicture());
         assertEquals(profile.getDateOfBirth(), resource.getBirthDate());
         assertEquals(Gender.MALE, resource.getGender());
         assertEquals(LocalDate.of(2015, Month.AUGUST, 14), resource.getStartDate());
