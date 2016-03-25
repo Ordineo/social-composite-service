@@ -51,6 +51,7 @@ public class SimpleCORSFilterTest {
         assertEquals(1, response.getHeaderValues("Access-Control-Allow-Origin").size());
         assertEquals("3600", response.getHeader("Access-Control-Max-Age"));
         assertEquals("location", response.getHeader("Access-Control-Expose-Headers"));
+        assertEquals("true", response.getHeader("Access-Control-Allow-Credentials"));
 
         for (RequestMethod requestMethod : RequestMethod.values()) {
             assertTrue("Should allow method " + requestMethod.name(), response.getHeader("Access-Control-Allow-Methods").contains(requestMethod.name()));
@@ -72,6 +73,7 @@ public class SimpleCORSFilterTest {
         assertEquals(1, response.getHeaderValues("Access-Control-Allow-Origin").size());
         assertEquals("3600", response.getHeader("Access-Control-Max-Age"));
         assertEquals("location", response.getHeader("Access-Control-Expose-Headers"));
+        assertEquals("true", response.getHeader("Access-Control-Allow-Credentials"));
 
         for (RequestMethod requestMethod : RequestMethod.values()) {
             assertTrue("Should allow method " + requestMethod.name(), response.getHeader("Access-Control-Allow-Methods").contains(requestMethod.name()));
@@ -92,6 +94,7 @@ public class SimpleCORSFilterTest {
         assertNull(response.getHeader("Access-Control-Expose-Headers"));
         assertNull(response.getHeader("Access-Control-Allow-Methods"));
         assertNull(response.getHeader("Access-Control-Allow-Headers"));
+        assertNull(response.getHeader("Access-Control-Allow-Credentials"));
     }
 
 }
