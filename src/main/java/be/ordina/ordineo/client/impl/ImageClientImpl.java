@@ -21,13 +21,10 @@ public class ImageClientImpl implements ImageClient {
 
     @Override
     public ResponseEntity synchronizeProfilePicture(String username, String profilePictureUrl) {
-        Map<String, String> urlVariables = new HashMap<>();
-        urlVariables.put("username", username);
-
         Map<String, String> headers = new HashMap<>();
         headers.put("url", profilePictureUrl);
 
-        return restTemplate.postForObject("https://image-ordineo/api/images/{username}", new HttpEntity(headers), ResponseEntity.class, urlVariables);
+        return restTemplate.postForObject("https://image-ordineo/api/images/{username}", new HttpEntity(headers), ResponseEntity.class, username);
     }
 
 }

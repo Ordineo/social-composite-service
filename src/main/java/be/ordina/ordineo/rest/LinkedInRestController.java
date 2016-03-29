@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.IOException;
-
 import static org.springframework.http.ResponseEntity.ok;
 
 /**
@@ -30,11 +28,10 @@ public class LinkedInRestController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity syncProfile(@RequestParam String username) throws IOException {
+    public ResponseEntity syncProfile(@RequestParam String username) {
         //passing username as a parameter so SocialConfig.RequestUsernameSource can fetch it
 
-        service.applyLinkedInDataToEmployee(username, linkedIn);
-        service.applyUserProfilePicture(username, linkedIn);
+        service.synchronizeEmployee(username, linkedIn);
 
         return ok().build();
     }

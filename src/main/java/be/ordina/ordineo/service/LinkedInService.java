@@ -1,7 +1,5 @@
 package be.ordina.ordineo.service;
 
-import be.ordina.ordineo.resource.EmployeeResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.social.linkedin.api.LinkedIn;
 
 import java.io.IOException;
@@ -11,8 +9,6 @@ import java.io.IOException;
  */
 public interface LinkedInService {
 
-     void applyLinkedInDataToEmployee (String username , LinkedIn linkedIn);
-
-     void applyUserProfilePicture(String username, LinkedIn linkedIn) throws IOException;
+    void synchronizeEmployee(String username, LinkedIn linkedIn);
 
 }
