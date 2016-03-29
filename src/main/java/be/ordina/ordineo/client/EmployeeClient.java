@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface EmployeeClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/employees/search/employee?username={username}")
-    EmployeeResource  getEmployee(@PathVariable("username") String username);
+    EmployeeResource getEmployee(@PathVariable("username") String username);
 
     @RequestMapping(method = RequestMethod.PUT,value = "/linkedin", consumes="application/json")
     ResponseEntity synchronizeEmployee(@RequestBody EmployeeResource employeeResource);
