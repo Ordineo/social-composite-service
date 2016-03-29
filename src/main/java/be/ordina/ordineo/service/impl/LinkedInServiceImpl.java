@@ -12,7 +12,6 @@ import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfileFull;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestOperations;
 
 import java.io.IOException;
 import java.net.URI;
