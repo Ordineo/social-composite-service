@@ -2,6 +2,7 @@ package be.ordina.ordineo.client.impl;
 
 import be.ordina.ordineo.client.ImageClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 public class ImageClientImpl implements ImageClient {
 
     @Autowired
+    @LoadBalanced
     private RestTemplate restTemplate;
 
     @Override
@@ -22,7 +24,7 @@ public class ImageClientImpl implements ImageClient {
         HttpHeaders headers = new HttpHeaders();
         headers.add("url", profilePictureUrl);
 
-        return restTemplate.postForObject("https://image-ordineo/api/images/{username}", new HttpEntity(headers), ResponseEntity.class, username);
+        return restTemplate.postForObject("https://image-ordineo/api/images/{username}", new HttpEntity(profilePictureUrl), ResponseEntity.class, username);
     }
 
 }

@@ -53,10 +53,7 @@ public class ImageClientImplTest {
         public boolean matches(Object argument) {
             if (argument instanceof HttpEntity) {
                 HttpEntity entity = (HttpEntity) argument;
-                List<String> urls = entity.getHeaders().get("url");
-                if (urls.size() == 1) {
-                    return profilePictureUrl.equals(urls.get(0));
-                }
+                return profilePictureUrl.equals(entity.getBody());
             }
 
             return false;
