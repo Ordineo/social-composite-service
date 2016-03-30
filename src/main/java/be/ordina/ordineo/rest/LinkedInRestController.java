@@ -30,7 +30,9 @@ public class LinkedInRestController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity syncProfile(@RequestParam String username) {
         //passing username as a parameter so SocialConfig.RequestUsernameSource can fetch it
-        service.applyLinkedInDataToEmployee(username,linkedIn);
+
+        service.synchronizeEmployee(username, linkedIn);
+
         return ok().build();
     }
 

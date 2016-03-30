@@ -11,6 +11,7 @@ import org.springframework.social.linkedin.api.LinkedIn;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
@@ -38,7 +39,8 @@ public class LinkedInRestControllerTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
 
-        verify(linkedInService).applyLinkedInDataToEmployee("test", linkedIn);
+        verify(linkedInService).synchronizeEmployee("test", linkedIn);
+        verifyNoMoreInteractions(linkedInService);
     }
 
 }
