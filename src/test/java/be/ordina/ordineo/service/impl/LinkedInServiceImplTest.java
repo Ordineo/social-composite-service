@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Null;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyNoMoreInteractions;
 
 /**
  * Created by gide on 22/03/16.
@@ -67,7 +69,9 @@ public class LinkedInServiceImplTest {
     public void synchronizeEmployee() throws Exception {
         linkedInService.synchronizeEmployee(username, linkedIn);
 
-        verify(mockLog, times(2)).error(anyString(), any(NullPointerException.class));
+        verify(mockLog).error(eq("Error when syncing basic employee data"), any(NullPointerException.class));
+        verify(mockLog).error(eq("Error when syncing profile picture"), any(NullPointerException.class));
+        verifyNoMoreInteractions(mockLog);
     }
 
     @Test
