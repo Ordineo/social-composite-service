@@ -9,6 +9,8 @@ spring:
     linkedin:
       app-id: 77yc61m5y3gv0e
       app-secret: hAL2JfmAtdzAOZPT
+  datasource:
+    schema: classpath:/schema.sql
 ---
 eureka:
   client:
