@@ -1,21 +1,20 @@
 package be.ordina.ordineo.config;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
+import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
-import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
-import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
-import org.springframework.social.linkedin.api.LinkedIn;
+import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 
 /**
  * Created by gide on 17/03/16.
@@ -23,9 +22,17 @@ import javax.servlet.http.HttpServletRequest;
 @Configuration
 public class SocialConfig extends SocialConfigurerAdapter {
 
+    @Autowired
+    private DataSource dataSource;
+
     @Override
     public UserIdSource getUserIdSource() {
         return new SessionUsernameSource();
+    }
+
+    @Override
+    public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
+        return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
     }
 
     protected static final class SessionUsernameSource implements UserIdSource {
