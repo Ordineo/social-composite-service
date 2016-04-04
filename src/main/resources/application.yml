@@ -10,7 +10,22 @@ spring:
       app-id: 77yc61m5y3gv0e
       app-secret: hAL2JfmAtdzAOZPT
   datasource:
-    schema: classpath:/schema.sql
+    driverClassName: com.mysql.jdbc.Driver
+
+cloud:
+  aws:
+    region:
+      static: us-east-1
+    credentials:
+      accessKey: 'AKIAIQYXG7RGROCRCKGQ'
+      secretKey: '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'
+      instanceProfile: true
+    rds:
+      social:
+        dbInstanceIdentifier: social
+        databaseName: social
+        username: admin
+        password: social-admin
 ---
 eureka:
   client:
@@ -18,6 +33,12 @@ eureka:
       defaultZone: https://eureka-ordineo.cfapps.io/eureka/ #http://localhost:8761/eureka/
 ribbon:
   IsSecure: true
+---
+spring:
+  profiles: test
+  datasource:
+    schema: classpath:/schema.sql
+    driverClassName: org.hsqldb.jdbc.JDBCDriver
 ---
 spring:
   profiles: cloud
