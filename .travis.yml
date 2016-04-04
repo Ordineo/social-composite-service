@@ -4,7 +4,7 @@ jdk:
 sudo: false
 install:
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-- mvn package
+- mvn package -Pcloud
 deploy:
   edge: true
   provider: cloudfoundry
