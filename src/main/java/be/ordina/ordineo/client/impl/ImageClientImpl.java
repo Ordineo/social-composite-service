@@ -24,7 +24,7 @@ public class ImageClientImpl implements ImageClient {
         HttpHeaders headers = new HttpHeaders();
         headers.add("url", profilePictureUrl);
 
-        return restTemplate.postForObject("https://image-ordineo/api/images/{username}", new HttpEntity(profilePictureUrl), ResponseEntity.class, username);
+        return restTemplate.postForObject("https://image-ordineo/api/images/url/{username}", new HttpEntity(profilePictureUrl), ResponseEntity.class, username);
     }
 
 }
