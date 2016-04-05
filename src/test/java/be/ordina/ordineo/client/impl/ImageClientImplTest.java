@@ -39,7 +39,7 @@ public class ImageClientImplTest {
 
         imageClient.synchronizeProfilePicture(username, profilePictureUrl);
 
-        verify(restTemplate).postForObject(eq("https://image-ordineo/api/images/{username}"), argThat(new HeaderArgumentMatcher(profilePictureUrl)), eq(ResponseEntity.class), eq(username));
+        verify(restTemplate).postForObject(eq("https://image-ordineo/api/images/url/{username}"), argThat(new HeaderArgumentMatcher(profilePictureUrl)), eq(ResponseEntity.class), eq(username));
     }
 
     private class HeaderArgumentMatcher extends ArgumentMatcher<String> {
