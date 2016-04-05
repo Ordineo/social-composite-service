@@ -3,9 +3,10 @@ jdk:
 - oraclejdk8
 sudo: false
 install:
-- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-- mvn test
-- mvn package -Pcloud -DskipTests=true
+  -
+script:
+  - mvn test
+  - mvn install -Pcloud -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 deploy:
   edge: true
   provider: cloudfoundry
