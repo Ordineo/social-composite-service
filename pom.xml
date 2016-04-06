@@ -170,28 +170,7 @@
 
     <profiles>
         <profile>
-            <id>local</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-aws-autoconfigure</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-aws-jdbc</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-aws-context</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>cloud</id>
+            <id>aws-rds</id>
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.cloud</groupId>
