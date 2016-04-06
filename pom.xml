@@ -190,6 +190,15 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>hsql</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.hsqldb</groupId>
+                    <artifactId>hsqldb</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
 
     <repositories>
