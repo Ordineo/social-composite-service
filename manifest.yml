@@ -2,7 +2,7 @@
 memory: 1GB
 instances: 1
 env:
-  SPRING_PROFILES_ACTIVE : cloud
+  SPRING_PROFILES_ACTIVE : cloud, aws-rds
   JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: {memory_heuristics: {heap: 70, metaspace: 10, stack: 10, native: 10}}]'
 applications:
 - name: social-ordineo
