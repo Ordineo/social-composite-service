@@ -1,16 +1,14 @@
-server:
-  port: ${PORT:8080}
-logging:
-  level:
-    be.ordina: 'DEBUG'
-    org.springframework.web: 'DEBUG'
 spring:
+  profiles:
+    active: @activeSpringProfile@
   social:
     linkedin:
       app-id: 77yc61m5y3gv0e
       app-secret: hAL2JfmAtdzAOZPT
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
+logging:
+  level:
+    be.ordina: 'DEBUG'
+    org.springframework.web: 'DEBUG'
 
 cloud:
   aws:
@@ -20,12 +18,7 @@ cloud:
       accessKey: 'AKIAIQYXG7RGROCRCKGQ'
       secretKey: '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'
       instanceProfile: true
-    rds:
-      social:
-        dbInstanceIdentifier: social
-        databaseName: social
-        username: admin
-        password: social-admin
+
 ---
 eureka:
   client:
@@ -33,12 +26,28 @@ eureka:
       defaultZone: https://eureka-ordineo.cfapps.io/eureka/ #http://localhost:8761/eureka/
 ribbon:
   IsSecure: true
+
 ---
 spring:
-  profiles: test
+  profiles: hsql
   datasource:
-    schema: classpath:/schema.sql
+    schema: classpath:/schema-hsql.sql
     driverClassName: org.hsqldb.jdbc.JDBCDriver
+
+---
+spring:
+  profiles: aws-rds
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+cloud:
+  aws:
+    rds:
+      social:
+        dbInstanceIdentifier: social
+        databaseName: social
+        username: admin
+        password: social-admin
+
 ---
 spring:
   profiles: cloud
