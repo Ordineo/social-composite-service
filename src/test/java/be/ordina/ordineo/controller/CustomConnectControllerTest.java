@@ -12,11 +12,17 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.web.SessionStrategy;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+
+import javax.servlet.http.HttpServletRequest;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
@@ -54,14 +60,32 @@ public class CustomConnectControllerTest {
     }
 
     @Test
+    public void oauth2ErrorCallbackOriginal() throws Exception {
+        request.getSession().setAttribute(LinkedInConnectionFilter.ORGINAL_URL, "test");
+        RedirectView view = controller.oauth2ErrorCallback(null, null, "description", null, null);
+        assertEquals("test?status=401&error_description=description", view.getUrl());
+    }
+
+    @Test
+    public void oauth2ErrorCallbackSuper() throws Exception {
+        SessionStrategy sessionStrategy = mock(SessionStrategy.class);
+        controller.setSessionStrategy(sessionStrategy);
+
+        NativeWebRequest request = mock(NativeWebRequest.class);
+        when(request.getNativeRequest(HttpServletRequest.class)).thenReturn( this.request );
+
+        RedirectView view = controller.oauth2ErrorCallback("linkedin", null, "description", null, request);
+        assertEquals("/connect/linkedin", view.getUrl());
+    }
+
+    @Test
     public void connectedViewOriginal() {
         request.getSession().setAttribute(LinkedInConnectionFilter.ORGINAL_URL, "test");
-        assertEquals("redirect:test", controller.connectedView(""));
+        assertEquals("redirect:test?status=200", controller.connectedView(""));
     }
 
     @Test
     public void connectedViewSuper() {
         assertEquals("connect/Connected", controller.connectedView(""));
     }
-
 }
